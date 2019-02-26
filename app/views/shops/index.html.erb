@@ -1,26 +1,14 @@
 <div class="container">
-  <div class="row">
-
-
-
-    <div class="barbershop_information">
-      <div class="col-sm-4 col-xs-12">
-        <%= image_tag "salon1.jpg", alt: "salon", width: 300 %>
-      </div>
-      <div class="col-sm-8 col xs-12">
-
-        <h4><%= Shop.shop_name %></h4>
-        <p><strong>Address:</strong><%= Shop.address %></p>
-        <p><strong>Phone:</strong><%= Shop.phone_number %></p>
-        <p><strong>Operation Hours:</strong><%= Shop.open_at %> ~ <%= Shop.close_at %></p>
-        <p><strong>Description:</strong><%= Shop.description %></p>
-        <button type="button" class="btn btn-info">Reserve</button>
-      </div>
+  <div class="cards">
+    <% @shops.each do |f|  %>
+    <div class="card-category">
+      <h4><%= f.shop_name %></h4>
+      <p><strong>Address:</strong><%= f.address %></p>
+      <p><strong>Phone:</strong><%= f.phone_number %></p>
+      <p><strong>Operation Hours:</strong><%= f.open_at %> ~ <%= f.close_at %></p>
+      <p><strong>Description:</strong><%= f.description %></p>
+      <%= link_to "Reserve", shop_path(f.id), class: "btn btn-info" %>
     </div>
-
-
-
-
-
+    <% end %>
   </div>
 </div>
