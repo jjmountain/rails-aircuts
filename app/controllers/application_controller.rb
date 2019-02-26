@@ -38,6 +38,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_sign_in_path_for(resource)
+    shops_path
+  end
+
   private
 
   def skip_pundit?

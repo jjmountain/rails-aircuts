@@ -1,6 +1,7 @@
 class ShopsController < ApplicationController
+
   def index
-    @shops = Shop.all
+    @shops = policy_scope(Shop)
   end
 
   def show
