@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_25_101514) do
+ActiveRecord::Schema.define(version: 2019_02_26_015233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
     t.date "scheduled_at"
-    t.string "state", default: "Pending"
-    t.string "description"
-    t.string "photo"
     t.bigint "barber_id"
     t.bigint "user_id"
+    t.string "state"
+    t.text "description"
+    t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["barber_id"], name: "index_appointments_on_barber_id"
@@ -30,45 +30,55 @@ ActiveRecord::Schema.define(version: 2019_02_25_101514) do
 
   create_table "barbers", force: :cascade do |t|
     t.string "name"
+    t.bigint "shop_id"
     t.integer "age"
+    t.text "description"
     t.string "gender"
     t.string "languages"
     t.string "avatar"
-    t.string "description"
-    t.bigint "shop_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shop_id"], name: "index_barbers_on_shop_id"
   end
 
   create_table "shops", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "shop_name"
     t.string "owner_name"
+    t.string "description"
     t.string "address"
-    t.text "description"
     t.integer "open_at"
     t.integer "close_at"
     t.string "photo"
     t.string "url"
     t.string "phone_number"
     t.string "logo"
-    t.string "email"
-    t.string "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_shops_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_shops_on_reset_password_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "avatar"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "age"
+    t.string "name"
     t.string "gender"
     t.string "address"
     t.string "languages"
-    t.string "email"
-    t.string "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "avatar"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "appointments", "barbers"
