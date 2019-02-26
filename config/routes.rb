@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  get 'shops/index'
-  get 'shops/show'
-  get 'shops/new'
-  get 'shops/create'
-  get 'shops/edit'
-  get 'shops/update'
   devise_for :shops
   devise_for :users
   root to: 'pages#home'
