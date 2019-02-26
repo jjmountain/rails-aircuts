@@ -1,22 +1,14 @@
 class ShopsController < ApplicationController
-    skip_before_action :authenticate_user!, only: :index
 
   def index
+<<<<<<< HEAD
     @shops = Shop.all
+=======
+    @shops = policy_scope(Shop)
+>>>>>>> 926e69135802b62ef32e3809aefb81f7ca3309ea
   end
 
   def show
-  end
-
-  def new
-  end
-
-  def create
-  end
-
-  def edit
-  end
-
-  def update
+    @shop = shop.find(params[:id])
   end
 end
