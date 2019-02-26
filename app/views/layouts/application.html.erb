@@ -10,8 +10,47 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
+    <div class="navbar-aircut">
+  <!-- Logo -->
+  <a href="/" class="navbar-aircut-brand">
+    <%= image_tag "aircuts_logo1.png", alt:"logo" %>
+  </a>
+
+  <!-- Right Navigation -->
+  <div class="navbar-aircut-right hidden-xs hidden-sm">
+
+    <a href="" class="navbar-aircut-item navbar-aircut-link">Log in</a>
+    <a href="" class="navbar-aircut-item navbar-aircut-link">Sign up</a>
+
+    <!-- Profile picture with dropdown list -->
+    <div class="navbar-aircut-item">
+      <div class="dropdown">
+        <i class="fas fa-bars" id="navbar-aircut-menu" data-toggle="dropdown"></i>
+        <ul class="dropdown-menu dropdown-menu-right navbar-aircut-dropdown-menu">
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dropdown appearing on mobile only -->
+  <div class="navbar-aircut-item hidden-md hidden-lg">
+    <div class="dropdown">
+      <i class="fas fa-bars dropdown-toggle" data-toggle="dropdown" role="button"></i>
+      <ul class="dropdown-menu dropdown-menu-right navbar-aircut-dropdown-menu">
+        <li><a href="#">Log in</a></li>
+        <li><a href="#">Sign up</a></li>
+        <li><a href="#">Messages</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
     <%= yield %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
   </body>
+
+
 </html>
