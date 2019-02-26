@@ -8,12 +8,19 @@ end
 class ShopParameterSanitizer < Devise::ParameterSanitizer
   def initialize(*)
     super
-    permit(:sign_up, keys: [:shop_name, :owner_name, :open_at, :close_at, :description, :address, :photo, :url, :phone_number, :logo ])
+    permit(:sign_up, keys: [ :shop_name, :owner_name, :open_at, :close_at, :description, :address, :photo, :url, :phone_number, :logo ])
   end
 end
 
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  include Pundit
+
+  after_action :verify_authorized, except: :index, unless: :skip_pundit?
+  after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
+
+
+
   # before_action :configure_permitted_parameters, if: :devise_controller?
 
   # def configure_permitted_parameters
@@ -29,5 +36,11 @@ class ApplicationController < ActionController::Base
     else
       super # Use the default one
     end
+  end
+
+  private
+
+  def skip_pundit?
+      devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
 end
