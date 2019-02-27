@@ -81,18 +81,3 @@ puts "Creating user"
 
 end
 puts "Finished creating users"
-
-# puts "Creating appointments"
-# Barber.find_each do |barber|
-#   3.times do
-#     Appointment.create!(
-#       scheduled_at: Faker::Date.between(2.days.ago, Date.today),
-#       state: ["Pending", "Approved", "Denied"].sample,
-#       description: ["Fades", "Buzzcut", "Crewcut"].sample,
-#       photo: Faker::Avatar.image,
-#       barber: barber,
-#       user: User.all.sample
-#     )
-#   end
-end
-# puts "Finished creating appointments"
