@@ -4,4 +4,5 @@ class Appointment < ApplicationRecord
   validates :state, presence: true
   validates :description, presence: true
   validates :photo, presence: true
+  validates :scheduled_at, presence: true
 end

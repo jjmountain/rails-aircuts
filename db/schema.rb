@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_26_015233) do
+ActiveRecord::Schema.define(version: 2019_02_27_030921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.date "scheduled_at"
+    t.datetime "scheduled_at"
     t.bigint "barber_id"
     t.bigint "user_id"
-    t.string "state"
+    t.string "state", default: "Pending"
     t.text "description"
     t.string "photo"
     t.datetime "created_at", null: false
