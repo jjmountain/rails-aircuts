@@ -27,9 +27,10 @@ ADDRESSES = ['Soho', 'Charing Cross', 'Soho', 'Covent Garden', 'Holloway', 'Farr
 
 IMAGES = ['shop_1.jpg', 'shop_2.jpg', 'shop_3.jpg', 'shop_4.jpg', 'shop_5.jpg', 'shop_6.jpg', 'shop_7.jpg', 'shop_8.jpg']
 
+sampled_number = 0
+
 puts "Creating Shops"
-  3.times do
-    sampled_number = Array(0..7).sample
+  7.times do
     Shop.create!(
       shop_name: SHOPNAMES[sampled_number],
       owner_name: Faker::Name.name,
@@ -44,7 +45,7 @@ puts "Creating Shops"
       email: Faker::Internet.email,
       password: 'secret'
     )
-
+    sampled_number += 1
 end
 puts "Finished creating shops"
 
