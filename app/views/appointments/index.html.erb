@@ -1,2 +1,22 @@
-<h1>Appointments#index</h1>
-<p>Find me in app/views/appointments/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Appointments for <%= current_user.name %></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+    <% @appointments.each do |a|%>
+      <div class="card-appointment">
+      <ul>
+        <li> Scheduled at: <%= a.scheduled_at %></li>
+        <li> At: <%= Barber.find(a.barber_id).shop.shop_name %></li>
+        <li> With: <%= Barber.find(a.barber_id).name %></li>
+        <li> Appointment Status: <%= a.state %></li>
+        <li> Description: <%= a.description %></li>
+      </ul>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

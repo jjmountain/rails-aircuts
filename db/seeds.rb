@@ -18,16 +18,26 @@
 # puts "Finished creating restaurants"
 require 'faker'
 
+
+DESCRIPTIONS = ["Just off the severely beaten cobbles of Carnaby Street lies Pankhurst, a haven for gentlemen who like their haircuts timeless and classic. Wait for your turn in the barber seat flicking through chunky coffee table mags in the basement conservatory, before choosing between a classic cut, wet shave or hot-towel massage.", "For an authentic Turkish barbering experience without having to set foot outside of London, try one of Ted’s Grooming Room’s 11 city-centre locations.", "A DJ turned barber to the stars, Joe Mills is a man who knows his way around a pair of scissors better than most.", "Producing its own range of acclaimed fragrances, creams and potions, Murdock is more than just a barber shop – it’s a grooming empire", "When the likes of Dizzee Rascal, Anthony Joshua, Tinie Tempah and Reggie Yates are after a flawless fade, there’s only one place in town they’ll go.", "If you’re not a fan of the whole ‘ye olde barber shop’ vibe that a lot of outposts seem hellbent on perpetuating, the sleek, modern styling of Farringdon’s Manifesto might be more to your liking.", "Located just off the East End’s bustling Brick Lane lies Nomad, an award-winning barber shop that lives up to its name.", "A bright and breezy space with industrial touches and an on-site coffee shop – Aveda Men isn’t what you might call your typical London barber shop. And that extends to more than just the decor."]
+
+SHOPNAMES = ["Pankhurst", "Ted’s Grooming Room", "Joe and Co.", "Murdock London", "Slider Cuts", "Manifesto", "Nomad Barber", "Aveda"]
+
+ADDRESSES = ['Soho', 'Charing Cross', 'Soho', 'Covent Garden', 'Holloway', 'Farringdom', 'Shoreditch', 'Covent Gard']
+
+IMAGES = ['0.jpg', '1.jpg', '2.jpg', '3.jpg', '4.jpg', '.jpg', '.jpg', '7.jpg']
+
 puts "Creating Shops"
   3.times do
+    sampled_number = Array(0..7).sample
     Shop.create!(
-      shop_name: Faker::Company.name,
+      shop_name: SHOPNAMES[sampled_number],
       owner_name: Faker::Name.name,
-      address: Faker::Address.street_address,
-      description: ["Fades", "Buzzcut", "Crewcut", "Pompadour"],
+      address: ADDRESSES[sampled_number],
+      description: DESCRIPTIONS[sampled_number],
       open_at: Faker::Number.number(1),
       close_at: Faker::Number.number(1),
-      photo: Faker::Avatar.image,
+      photo: IMAGES[sampled_number],
       url: ["http://www.cutit.co.jp/", "https://www.goldsalontokyo.com/", "http://barberboys.jp/"].sample,
       phone_number: Faker::PhoneNumber.phone_number,
       logo: Faker::Avatar.image,
