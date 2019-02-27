@@ -1,5 +1,5 @@
 class ShopsController < ApplicationController
-  after_action :verify_authorized, except: [:index, :show]
+  skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
     @shops = policy_scope(Shop)
@@ -7,8 +7,8 @@ class ShopsController < ApplicationController
 
   def show
     @shop = Shop.find(params[:id])
+    authorize @shop
     @user = current_user
-
     @appointment = Appointment.new
   end
 end
