@@ -9,10 +9,10 @@
     <% @appointments.each do |a|%>
       <div class="card-appointment">
       <ul>
+        <strong> Appointment Status: <%= a.state %></strong>
         <li> Scheduled at: <%= a.scheduled_at %></li>
-        <li> At: <%= Barber.find(a.barber_id).shop.shop_name %></li>
-        <li> With: <%= Barber.find(a.barber_id).name %></li>
-        <li> Appointment Status: <%= a.state %></li>
+        <li> At: <%= a.barber.shop.shop_name %></li>
+        <li> With: <%= a.barber.name %></li>
         <li> Description: <%= a.description %></li>
       </ul>
       </div>

@@ -1,13 +1,14 @@
 <div class="container">
   <div class="cards">
-    <% @shops.each do |f|  %>
+    <% @shops.each do |shop|  %>
     <div class="card-category">
-      <h4><%= f.shop_name %></h4>
-      <p><strong>Address:</strong><%= f.address %></p>
-      <p><strong>Phone:</strong><%= f.phone_number %></p>
-      <p><strong>Operation Hours:</strong><%= f.open_at %> ~ <%= f.close_at %></p>
-      <p><strong>Description:</strong><%= f.description %></p>
-      <%= link_to "Reserve", shop_path(f.id), class: "btn btn-info" %>
+      <h4><%= shop.shop_name %></h4>
+      <p><strong>Address:</strong><%= shop.address %></p>
+      <p><strong>Phone:</strong><%= shop.phone_number %></p>
+      <p><strong>Operation Hours:</strong><%= shop.open_at %> ~ <%= shop.close_at %></p>
+      <p><strong>Description:</strong><%= shop.description %></p>
+        <%= image_tag shop.photo, class: "shop-image"%>
+      <%= link_to "Reserve", shop_path(shop), class: "btn btn-info" %>
     </div>
     <% end %>
   </div>

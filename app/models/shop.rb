@@ -3,7 +3,7 @@ class Shop < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :barbers
+  has_many :barbers, dependent: :destroy
   has_many :appointments, through: :barbers
   HOURS = Array(0..23)
   validates :shop_name, presence: true

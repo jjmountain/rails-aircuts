@@ -25,7 +25,7 @@ SHOPNAMES = ["Pankhurst", "Ted’s Grooming Room", "Joe and Co.", "Murdock Londo
 
 ADDRESSES = ['Soho', 'Charing Cross', 'Soho', 'Covent Garden', 'Holloway', 'Farringdom', 'Shoreditch', 'Covent Gard']
 
-IMAGES = ['0.jpg', '1.jpg', '2.jpg', '3.jpg', '4.jpg', '.jpg', '.jpg', '7.jpg']
+IMAGES = ['shop_0.jpg', 'shop_1.jpg', 'shop_2.jpg', 'shop_3.jpg', 'shop_4.jpg', 'shop_5.jpg', 'shop_6.jpg', 'shop_7.jpg']
 
 puts "Creating Shops"
   3.times do
