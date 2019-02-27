@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'appointments/index'
+  get 'appointments/create'
+  get 'appointments/destroy'
+  get 'appointments/update'
   devise_for :shops
   devise_for :users
   root to: 'pages#home'
