@@ -1,17 +1,28 @@
-
-
-
 <div class="container">
   <div class="row">
 
-<h1>Barbershop Store Name</h1>
+
 
     <div class="barbershop_information">
-      <h2>Phone number</h2>
-      <h3>Business Hours</h3>
-      <p>Price Range</p>
-      <p>Reserve</p>
+      <div class="col-sm-4 col-xs-12">
+        <%= image_tag "salon1.jpg", alt: "salon", width: 300 %>
+      </div>
+      <% @shops.each do | shop | %>
+        <div class="col-sm-8 col xs-12">
+          <h4><%= shop.shop_name %></h4>
+          <p><strong>Address:</strong><%= shop.address %></p>
+          <p><strong>Phone:</strong><%= shop.phone_number %></p>
+          <p><strong>Operation Hours:</strong><%= shop.open_at %> ~ <%= shop.close_at %></p>
+          <p><strong>Description:</strong><%= shop.description %></p>
+          <button type="button" class="btn btn-info">Reserve</button>
+          <% console %>
+        </div>
+      <% end %>
     </div>
+
+
+
+
 
   </div>
 </div>

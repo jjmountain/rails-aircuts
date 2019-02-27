@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # puts "Creating Restaurants"
-# 5.times do 
+# 5.times do
 # Restaurant.create!(
 #     name: Faker::Name.name,
 #     address: Faker::Address.street_address,
@@ -32,16 +32,16 @@ puts "Creating Shops"
       phone_number: Faker::PhoneNumber.phone_number,
       logo: Faker::Avatar.image,
       email: Faker::Internet.email,
-      password: Faker::Games::Pokemon.name
+      password: 'secret'
     )
-  
+
 end
 puts "Finished creating shops"
 
 puts "Creating Barbers"
 Shop.find_each do |shop|
   puts "Barbers"
-  3.times do 
+  3.times do
     Barber.create!(
       name: Faker::Name.name,
       shop: shop,
@@ -51,7 +51,7 @@ Shop.find_each do |shop|
       description: ["Fades", "Buzzcut", "Crewcut"].sample,
       avatar: Faker::Avatar.image
     )
-  end 
+  end
 end
 puts "Finished creating barbers"
 
@@ -65,16 +65,15 @@ puts "Creating user"
       address: Faker::Address.street_address,
       languages: ["English", "Japanese", "Spanish"].sample,
       email: Faker::Internet.email,
-      password: Faker::Games::Heroes.name
+      password: 'secret'
     )
-  
+
 end
 puts "Finished creating users"
 
 puts "Creating appointments"
 Barber.find_each do |barber|
-  puts "Appointments"
-  3.times do 
+  3.times do
     Appointment.create!(
       scheduled_at: Faker::Date.between(2.days.ago, Date.today),
       state: ["Pending", "Approved", "Denied"].sample,

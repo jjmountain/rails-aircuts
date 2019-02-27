@@ -19,9 +19,10 @@
   <!-- Right Navigation -->
   <div class="navbar-aircut-right hidden-xs hidden-sm">
 
-    <a href="" class="navbar-aircut-item navbar-aircut-link">Log in</a>
-    <a href="" class="navbar-aircut-item navbar-aircut-link">Sign up</a>
-
+    <% if user_signed_in? == false %>
+      <%= link_to "Log in", new_user_session_path, class: "navbar-aircut-item navbar-aircut-link" %>
+    <% end %>
+    <%= link_to "Barber", new_shop_session_path, class: "navbar-aircut-item navbar-aircut-link" %>
     <!-- Profile picture with dropdown list -->
     <div class="navbar-aircut-item">
       <div class="dropdown">
@@ -29,7 +30,11 @@
         <ul class="dropdown-menu dropdown-menu-right navbar-aircut-dropdown-menu">
           <li><a href="#">Profile</a></li>
           <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Log Out</a></li>
+          <% if user_signed_in? %>
+          <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+          <% elsif shop_signed_in? %>
+          <li><%= link_to "Log out", destroy_shop_session_path, method: :delete %></li>
+         <% end %>
         </ul>
       </div>
     </div>
