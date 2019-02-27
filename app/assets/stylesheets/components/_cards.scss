@@ -1,3 +1,31 @@
 .card-category {
-    border: solid 2px #000;
+    border: solid 1px #000;
+    box-shadow: 1px 1px 1px #000;
+    border-radius: 20px;
+    margin:10px auto;
+    background-color: #fdf5e6;
+}
+
+.card-category {
+  h4 {
+    padding-left: 20px;
+    font-style: italic;
+  }
+
+  p {
+    font-size:16px;
+    padding-left: 20px;
+  }
+
+  p strong {
+    text-decoration: underline;
+    padding-right: 10px;
+  }
+
+  .btn {
+    margin-left:20px;
+    margin-bottom:20px;
+    border-radius: 10px;
+  }
+
 }
