@@ -10,33 +10,33 @@
     align-items: center;
     justify-content: space-between;
   }
-  
+
   /* Logo */
   .navbar-aircut-brand img {
     width: 110px;
     height: 50px;
   }
-  
+
   /* User Avatar */
   .navbar-aircut .avatar {
     height: 35px;
     width: 35px;
     border-radius: 50%;
   }
-  
+
   /* Right section */
   .navbar-aircut-right {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  
+
   /* Basic navbar item */
   .navbar-aircut-item {
     cursor: pointer;
     padding: 0 20px;
   }
-  
+
   /* Navbar link */
   .navbar-aircut-link {
     color: #616668;
@@ -47,7 +47,7 @@
     color: #da552f;
     text-decoration: none;
   }
-  
+
   /* Dropdown menu */
   .navbar-aircut-dropdown-menu {
     margin-top: 15px;
@@ -104,4 +104,19 @@
     color: rgb(255, 255, 255);
     opacity: 0.6;
     margin-bottom: 30px;
+  }
+
+  .search {
+    width:350px;
+    color: #000;
+  }
+
+  .search {
+    h2 {
+      color:#fff;
+      // text-decoration: underline;
+    }
+    .btn {
+      border-radius: 10px;
+    }
   }
