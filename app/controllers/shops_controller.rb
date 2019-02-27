@@ -1,14 +1,15 @@
 class ShopsController < ApplicationController
+  after_action :verify_authorized, except: [:index, :show]
 
   def index
-<<<<<<< HEAD
     @shops = Shop.all
-=======
     @shops = policy_scope(Shop)
->>>>>>> 926e69135802b62ef32e3809aefb81f7ca3309ea
   end
 
   def show
-    @shop = shop.find(params[:id])
+    @shop = Shop.find(params[:id])
+    @user = current_user
+
+    @appointment = Appointment.new
   end
 end
