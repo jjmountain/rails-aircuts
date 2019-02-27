@@ -2,8 +2,8 @@ class ShopsController < ApplicationController
   after_action :verify_authorized, except: [:index, :show]
 
   def index
-    @shops = policy_scope(Shop)
     @shops = Shop.all
+    @shops = policy_scope(Shop)
   end
 
   def show
