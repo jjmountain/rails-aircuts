@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row d-flex">
-    <div class="appointment_form" style="width: 600px; margin-top: 30px; justify-content: center; align-items: center;">
+    <div class="appointment_form">
       <h2> Book an appointment at <%= @shop.shop_name %> </h2>
     <%= simple_form_for [@shop, @appointment] do |f| %>
       <%= f.association :barber, collection: Barber.order(name: :asc) %>
       <%= f.input :scheduled_at, wrapper: :vertical_collection_inline %>
       <%= f.input :description %>
       <%= f.input :photo, as: :file %>
-      <%= f.submit "Book an Appointment", class: "btn btn-primary" %>
+      <%= f.submit "Book an Appointment", class: "btn btn-light" %>
     <% end %>
     </div>
   </div>
