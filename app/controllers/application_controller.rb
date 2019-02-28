@@ -8,7 +8,7 @@ end
 class ShopParameterSanitizer < Devise::ParameterSanitizer
   def initialize(*)
     super
-    permit(:sign_up, keys: [ :shop_name, :owner_name, :open_at, :close_at, :description, :address, :photo, :url, :phone_number, :logo ])
+    permit(:sign_up, keys: [ :shop_name, :owner_name, :description, :address, :photo, :url, :phone_number ])
   end
 end
 
@@ -37,7 +37,13 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    shops_path
+    # raise
+    if resource.class == Shop
+      incoming_appointments_path
+    else
+      appointments_path
+    end
+
   end
 
   private
