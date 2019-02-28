@@ -66,15 +66,40 @@
     }
   }
 
+  .appointment_form {
+    width:53%;
+    margin: 15px auto;
+    background-color:#D3D3D3;
+    padding:10px 30px;
+    border-radius:10px;
+    box-shadow: 1px 2px 5px #000;
+  }
+
+  .appointment_form {
+    .btn {
+      background-color:#8b5d2e;
+      color:white;
+      border-radius: 2px;
+    }
+  }
+
   @media screen and (min-width:480px) and (max-width:959px) {
     .barbershop_information {
       height:300px;
-    }/* 利用の際は消去 */
+    }
+
+    .appointment_form {
+      width:95%;
+    }
   }
 
   @media screen and (max-width:480px) {
   .barbershop_information {
     height:550px;
-    }/* 利用の際は消去 */
+    }
+
+  .appointment_form {
+    width:95%;
+  }
   }
 

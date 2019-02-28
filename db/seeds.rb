@@ -1,57 +1,178 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+require "json"
+require "http"
+require "optparse"
+require "faker"
+
+
+# Place holders for Yelp Fusion's API key. Grab it
+# from https://www.yelp.com/developers/v3/manage_app
+API_KEY = "L0XyFjJHL4FvmF6-gX-RjFkWr4rQkRK-hzgbtOjimqww873_yg7H87OmI_TF9YmHlWFO_zlWyaXUcX8qn17kITKmbJjtvVtiGenykJNWqjwfRB6_D_HYt8K3MHN2XHYx"
+
+
+# Constants, do not change these
+API_HOST = "https://api.yelp.com"
+SEARCH_PATH = "/v3/businesses/search"
+BUSINESS_PATH = "/v3/businesses/"  # trailing / because we append the business id to the path
+
+
+DEFAULT_BUSINESS_ID = "yelp-san-francisco"
+DEFAULT_TERM = "dinner"
+DEFAULT_LOCATION = "San Francisco, CA"
+SEARCH_LIMIT = 1
+
+
+# Make a request to the Fusion search endpoint. Full documentation is online at:
+# https://www.yelp.com/developers/documentation/v3/business_search
 #
-# Examples:
+# term - search term used to find businesses
+# location - what geographic location the search should happen
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Examples
+#
+#   search("burrito", "san francisco")
+#   # => {
+#          "total": 1000000,
+#          "businesses": [
+#            "name": "El Farolito"
+#            ...
+#          ]
+#        }
+#
+#   search("sea food", "Seattle")
+#   # => {
+#          "total": 1432,
+#          "businesses": [
+#            "name": "Taylor Shellfish Farms"
+#            ...
+#          ]
+#        }
+#
+# Returns a parsed json object of the request
+def search(category, location, offset)
+  url = "#{API_HOST}#{SEARCH_PATH}"
+  params = {
+    categories: category,
+    location: location,
+    limit: 50,
+    offset: offset
+  }
 
-# puts "Creating Restaurants"
-# 5.times do
-# Restaurant.create!(
-#     name: Faker::Name.name,
-#     address: Faker::Address.street_address,
-#     category: Restaurant::CATEGORIES.sample,
-#     phone_number: Faker::PhoneNumber.phone_number
-# )
-# end
-# puts "Finished creating restaurants"
-require 'faker'
+  response = HTTP.auth("Bearer #{API_KEY}").get(url, params: params)
+  response.parse
+end
 
 
-DESCRIPTIONS = ["Just off the severely beaten cobbles of Carnaby Street lies Pankhurst, a haven for gentlemen who like their haircuts timeless and classic. Wait for your turn in the barber seat flicking through chunky coffee table mags in the basement conservatory, before choosing between a classic cut, wet shave or hot-towel massage.", "For an authentic Turkish barbering experience without having to set foot outside of London, try one of Ted’s Grooming Room’s 11 city-centre locations.", "A DJ turned barber to the stars, Joe Mills is a man who knows his way around a pair of scissors better than most.", "Producing its own range of acclaimed fragrances, creams and potions, Murdock is more than just a barber shop – it’s a grooming empire", "When the likes of Dizzee Rascal, Anthony Joshua, Tinie Tempah and Reggie Yates are after a flawless fade, there’s only one place in town they’ll go.", "If you’re not a fan of the whole ‘ye olde barber shop’ vibe that a lot of outposts seem hellbent on perpetuating, the sleek, modern styling of Farringdon’s Manifesto might be more to your liking.", "Located just off the East End’s bustling Brick Lane lies Nomad, an award-winning barber shop that lives up to its name.", "A bright and breezy space with industrial touches and an on-site coffee shop – Aveda Men isn’t what you might call your typical London barber shop. And that extends to more than just the decor."]
+# Look up a business by a given business id. Full documentation is online at:
+# https://www.yelp.com/developers/documentation/v3/business
+#
+# business_id - a string business id
+#
+# Examples
+#
+#   business("yelp-san-francisco")
+#   # => {
+#          "name": "Yelp",
+#          "id": "yelp-san-francisco"
+#          ...
+#        }
+#
+# Returns a parsed json object of the request
+def business(business_id)
+  url = "#{API_HOST}#{BUSINESS_PATH}#{business_id}"
 
-SHOPNAMES = ["Pankhurst", "Ted’s Grooming Room", "Joe and Co.", "Murdock London", "Slider Cuts", "Manifesto", "Nomad Barber", "Aveda"]
+  response = HTTP.auth("Bearer #{API_KEY}").get(url)
+  response.parse
+end
 
-ADDRESSES = ['Soho', 'Charing Cross', 'Soho', 'Covent Garden', 'Holloway', 'Farringdom', 'Shoreditch', 'Covent Gard']
+def reviews(business_id)
+  url = "#{API_HOST}#{BUSINESS_PATH}#{business_id}/reviews"
 
-IMAGES = ['shop_1.jpg', 'shop_2.jpg', 'shop_3.jpg', 'shop_4.jpg', 'shop_5.jpg', 'shop_6.jpg', 'shop_7.jpg', 'shop_8.jpg']
+  response = HTTP.auth("Bearer #{API_KEY}").get(url)
+  response.parse
+end
 
-sampled_number = 0
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Example usage: ruby sample.rb (search|lookup) [options]"
+
+  opts.on("-tTERM", "--term=TERM", "Search term (for search)") do |term|
+    options[:term] = term
+  end
+
+  opts.on("-lLOCATION", "--location=LOCATION", "Search location (for search)") do |location|
+    options[:location] = location
+  end
+
+  opts.on("-bBUSINESS_ID", "--business-id=BUSINESS_ID", "Business id (for lookup)") do |id|
+    options[:business_id] = id
+  end
+
+  opts.on("-h", "--help", "Prints this help") do
+    puts opts
+    exit
+  end
+end.parse!
+
+
+command = ARGV
+
+
+case command.first
+when "search"
+  term = options.fetch(:term, DEFAULT_TERM)
+  location = options.fetch(:location, DEFAULT_LOCATION)
+
+  raise "business_id is not a valid parameter for searching" if options.key?(:business_id)
+
+  response = search(term, location)
+
+  puts "Found #{response["total"]} businesses. Listing #{SEARCH_LIMIT}:"
+  response["businesses"].each {|biz| puts biz["name"]}
+when "lookup"
+  business_id = options.fetch(:business_id, DEFAULT_BUSINESS_ID)
+
+
+  raise "term is not a valid parameter for lookup" if options.key?(:term)
+  raise "location is not a valid parameter for lookup" if options.key?(:lookup)
+
+  response = business(business_id)
+
+  puts "Found business with id #{business_id}:"
+  puts JSON.pretty_generate(response)
+else
+  puts "Please specify a command: search or lookup"
+end
+
+offset = 0
 
 puts "Creating Shops"
-  7.times do
-    Shop.create!(
-      shop_name: SHOPNAMES[sampled_number],
+
+2.times do
+# running this returns 50 barber businesses in Tokyo from yelp
+  parsed_json = search("barbers,menshair", "Japan", offset)
+  parsed_json["businesses"].each do | b |
+    shop = Shop.create!(
+      yelp_id: b["id"],
+      shop_name: b["name"],
       owner_name: Faker::Name.name,
-      address: ADDRESSES[sampled_number],
-      description: DESCRIPTIONS[sampled_number],
-      open_at: Faker::Number.number(1),
-      close_at: Faker::Number.number(1),
-      photo: IMAGES[sampled_number],
-      url: ["http://www.cutit.co.jp/", "https://www.goldsalontokyo.com/", "http://barberboys.jp/"].sample,
-      phone_number: Faker::PhoneNumber.phone_number,
-      logo: Faker::Avatar.image,
       email: Faker::Internet.email,
-      password: 'secret'
-    )
-    sampled_number += 1
+      address: b["location"]["display_address"].join(" "),
+      latitude: b["coordinates"]['latitude'],
+      longitude: b["coordinates"]['longitude'],
+      rating: b["rating"],
+      url: b["url"],
+      price: b["price"].to_s,
+      phone_number: b["phone"],
+      photo: b["image_url"],
+      password: 'secret',
+      )
+  end
+  offset += 50
 end
-puts "Finished creating shops"
 
 puts "Creating Barbers"
 Shop.find_each do |shop|
-  puts "Barbers"
   3.times do
     Barber.create!(
       name: Faker::Name.name,
@@ -65,19 +186,8 @@ Shop.find_each do |shop|
   end
 end
 puts "Finished creating barbers"
+# puts business(parsed_json["businesses"].first["id"])
+# puts reviews(parsed_json["businesses"].first["id"])["reviews"].first["text"]
 
-puts "Creating user"
-  3.times do
-    User.create!(
-      name: Faker::Name.name,
-      avatar: Faker::Avatar.image,
-      age: Faker::Number.number(2),
-      gender: Faker::Gender.binary_type,
-      address: Faker::Address.street_address,
-      languages: ["English", "Japanese", "Spanish"].sample,
-      email: Faker::Internet.email,
-      password: 'secret'
-    )
+# puts 'creating shops'
 
-end
-puts "Finished creating users"
