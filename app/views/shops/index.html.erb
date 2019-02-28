@@ -3,12 +3,12 @@
     <% @shops.each do |shop|  %>
     <div class="card-category">
       <h4><%= shop.shop_name %></h4>
-      <p><strong>Address:</strong><%= shop.address %></p>
+      <p><strong>Address:</strong><br><%= shop.address %></p>
       <p><strong>Phone:</strong><%= shop.phone_number %></p>
       <p><strong>Rating:</strong><%= shop.rating %></p>
       <p><strong>price:</strong><%= shop.price %></p>
-        <%= image_tag shop.photo, class: "shop-image"%>
-      <%= link_to "Reserve", shop_path(shop), class: "btn btn-info" %>
+      <%= image_tag shop.photo, class: "shop-image"%>
+      <%= link_to "Reserve", shop_path(shop), class: "btn btn-light" %>
     </div>
     <% end %>
   </div>
