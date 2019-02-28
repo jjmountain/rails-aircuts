@@ -1,22 +1,28 @@
+
+
 <div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h1>Appointments for <%= current_user.name %></h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-6">
-    <% @appointments.each do |a|%>
-      <div class="card-appointment">
-      <ul>
-        <strong> Appointment Status: <%= a.state %></strong>
-        <li> Scheduled at: <%= a.scheduled_at %></li>
-        <li> At: <%= a.barber.shop.shop_name %></li>
-        <li> With: <%= a.barber.name %></li>
-        <li> Description: <%= a.description %></li>
-      </ul>
+    <div class="row">
+      <div class="col-12">
+        <h1>Appointments for <%= current_user.name %></h1>
+
       </div>
-    <% end %>
     </div>
+  <div class="row">
+    <div class="col-sm-12 col-xs-12">
+      <% @appointments.each do |a|%>
+        <div class="card-appointment">
+        <ul>
+          <strong> Appointment Status: <%= a.state %></strong>
+          <li> Scheduled at: <%= a.scheduled_at %></li>
+          <li> At: <%= a.barber.shop.shop_name %></li>
+          <li> With: <%= a.barber.name %></li>
+          <!-- <li> Description: <%= a.description %></li> -->
+        </ul>
+        </div>
+      <% end %>
+    </div>
+
   </div>
 </div>
+
+
