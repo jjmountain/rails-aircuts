@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-
-  get 'appointments/index'
-  get 'appointments/create'
-  get 'appointments/destroy'
-  get 'appointments/update'
   devise_for :shops
   devise_for :users
   root to: 'pages#home'
@@ -12,6 +7,8 @@ Rails.application.routes.draw do
     resources :appointments, only: [ :new, :create  ]
     resources :barbers, only: [ :new, :create ]
   end
-  resources :appointments, only: [ :index, :destroy ]
+  resources :appointments, only: [ :index, :update, :destroy ]
+  resources :incoming_appointments, only: [ :index, :update, :destroy ]
   resources :barbers, only: [ :destroy ]
+  # get 'shop_appointments', to: 'shop_appointments#index', as: :shop_appointments_index
 end
