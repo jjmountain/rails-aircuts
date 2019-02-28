@@ -1,0 +1,29 @@
+h2 {
+  margin: 30px;
+  padding: 25px;
+  text-align: center;
+}
+
+.form-group.email.optional.user_email {
+  margin: 30px;
+}
+
+.form-group.password.optional.user_password {
+  margin: 30px;
+}
+
+.form-check-label.boolean.optional {
+  margin-left: 15px;
+}
+
+.form-actions {
+  margin: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.render {
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+}
