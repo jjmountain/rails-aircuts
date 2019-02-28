@@ -1,3 +1,7 @@
+require "json"
+require "http"
+# require "optparse"
+
 class ShopsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
@@ -11,4 +15,5 @@ class ShopsController < ApplicationController
     @user = current_user
     @appointment = Appointment.new
   end
+
 end
