@@ -1,5 +1,9 @@
-// Import your components CSS files here.
-@import "alert";
-@import "navbar";
-@import 'cards';
-@import 'appointment_form';
+@import "components/_alert";
+@import "components/_login";
+@import "components/_appointment";
+@import "components/_banner";
+@import "components/_navbar";
+@import "components/_appointment";
+@import "components/_appointment_form";
+@import "components/_cards";
+
