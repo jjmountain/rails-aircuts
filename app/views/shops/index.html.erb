@@ -1,17 +1,21 @@
-<div class="container">
-  <div class="cards">
-    <% @shops.each do |shop|  %>
-    <div class="shop-card">
+<div class="wrapper">
+  <div class="container">
+    <div class="cards">
       <div>
-      <h4><%= shop.shop_name %>  <%= shop.price %></h4>
-        <p></p>
-        <p><%= shop.phone_number %></p>
-        <p><%= shop.address %></p>
-        <p><strong>Yelp Rating:</strong><%= shop.rating %> stars</p>
-      <%= link_to "Book an appointment", shop_path(shop), class: "btn" %>
+        <% @shops.each do |shop|  %>
+          <div class="shop-card" style="width: 70vw;">
+            <div>
+            <h4><%= shop.shop_name %>  <%= shop.price %></h4>
+              <p></p>
+              <p><%= shop.phone_number %></p>
+              <p><%= shop.address %></p>
+              <p><strong>Yelp Rating:</strong><%= shop.rating %> stars</p>
+            <%= link_to "Book an appointment", shop_path(shop), class: "btn" %>
+          </div>
+            <%= image_tag shop.photo, class: "shop-image"%>
+          </div>
+        <% end %>
+      </div>
     </div>
-      <%= image_tag shop.photo, class: "shop-image"%>
-    </div>
-    <% end %>
   </div>
 </div>
