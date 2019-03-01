@@ -21,7 +21,7 @@
             <h4>Book an appointment at <%= @shop.shop_name %> </h4>
             <%= simple_form_for [@shop, @appointment] do |f| %>
               <%= f.association :barber, collection: @shop.barbers.order(name: :asc) %>
-              <%= f.input :scheduled_at, wrapper: :vertical_collection_inline %>
+              <%= f.input :scheduled_at, as: :string, required: true, input_html: {class: "datepicker"}  %>
               <%= f.input :description, value: 'what kind of cut do you want?' %>
               <%= f.submit "Book an Appointment", class: "btn" %>
             <% end %>
