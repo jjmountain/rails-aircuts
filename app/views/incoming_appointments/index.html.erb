@@ -1,38 +1,45 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12" id="appointment-for-shop">
       <h1>Appointments for <%= current_shop.shop_name %></h1>
     </div>
   </div>
   <div class="row">
-    <div class="col-6">
     <% @appointments.each do |a|%>
+    <div class="col-xs-12 col-md-4">
       <div class="card-appointment">
-      <ul>
-        <strong> Appointment Status: <%= a.state %></strong>
-        <li> Scheduled at: <%= a.scheduled_at %></li>
-        <li> At: <%= a.barber.shop.shop_name %></li>
-        <li> With: <%= a.barber.name %></li>
+      <ul class="list-unstyled">
+        <strong> Appointment Status:</strong>
+        <% if a.state == "Approved" || a.state == "Denied" %>
+          <li><%= a.state %></li>
+        <% else  %>
+          <li>
+            <div class="my-flex-form">
+              <% if a.state == 'Pending' %>
+              <%= simple_form_for a, url: incoming_appointment_path(a) do |f| %>
+                  <%= f.hidden_field :state, value: 'Accepted' %>
+                  <%= f.submit "Accept", class: "btn btn-primary btn-sm" %>
+              <% end %>
+
+
+              <%= simple_form_for a, url: incoming_appointment_path(a) do |f| %>
+                  <%= f.hidden_field :state, value: 'Denied' %>
+                  <%= f.submit "Denied", class: "btn btn-danger btn-sm" %>
+              <% end %>
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+
+        <li> Scheduled at:  </li>
+        <li><%= a.scheduled_at.strftime('%b %e, %l:%M %p')%></li>
+        <li> Customer: <%= a.user.name %></li>
+        <li> Barber: <%= a.barber.name %></li>
         <li> Description: <%= a.description %></li>
-        <li>
 
-            <% if a.state == 'Pending' %>
-          <%= simple_form_for a, url: incoming_appointment_path(a) do |f| %>
-              <%= f.hidden_field :state, value: 'Accepted' %>
-              <%= f.submit "Accept Appointment", class: "btn btn-primary" %>
-          <% end %>
-
-
-          <%= simple_form_for a, url: incoming_appointment_path(a) do |f| %>
-              <%= f.hidden_field :state, value: 'Denied' %>
-              <%= f.submit "Denied Appointment", class: "btn btn-danger" %>
-          <% end %>
-          <% end %>
-
-        </li>
       </ul>
       </div>
+     </div>
     <% end %>
-    </div>
   </div>
 </div>

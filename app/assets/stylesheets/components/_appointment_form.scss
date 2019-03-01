@@ -2,3 +2,39 @@
   margin-left: 195px;
 }
 
+.card-appointment {
+  text-align: center;
+  line-height: 30px;
+  font-size: 20px;
+  border-radius: 5px;
+  height: 330px;
+  li {
+    padding: 3px 0px;
+  }
+}
+
+// #shop-appointment {
+//   display: flex;
+//   justify-content: space-around;
+//   flex-wrap: wrap;
+// }
+
+#appointment-for-shop {
+  text-align: center;
+}
+
+.btn.btn-primary {
+  border-radius: 6px;
+  margin: 2px;
+}
+
+
+.btn.btn-danger {
+  border-radius: 6px;
+  margin: 2px;
+}
+
+.my-flex-form {
+  display: flex;
+  justify-content: center;
+}
