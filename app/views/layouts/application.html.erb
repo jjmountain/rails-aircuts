@@ -20,24 +20,20 @@
 
 
 <div class="navbar-aircut-right">
-  <% console %>
 
-    <% if user_signed_in? == false %>
-    <%= link_to "Log in", new_user_session_path, class: "navbar-aircut-item navbar-aircut-link" %>
+    <% unless user_signed_in? || shop_signed_in? %>
+      <%= link_to "Log in", new_user_session_path, class: "navbar-aircut-item navbar-aircut-link" %>
       |
-    <%= link_to "Barber log in", new_shop_session_path, class: "navbar-aircut-item navbar-aircut-link" %>
-    <% elsif shop_signed_in? == false %>
-    <%= link_to "Log in", new_user_session_path, class: "navbar-aircut-item navbar-aircut-link" %>
-      |
-    <%= link_to "Barber log in", new_shop_session_path, class: "navbar-aircut-item navbar-aircut-link" %>
+      <%= link_to "Barber log in", new_shop_session_path, class: "navbar-aircut-item navbar-aircut-link" %>
     <% end %>
 
-       <% if user_signed_in? %>
-         <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "navbar-aircut-item navbar-aircut-link" %>
-       <% elsif shop_signed_in? %>
-         <%= link_to "Log out", destroy_shop_session_path, method: :delete, class: "navbar-aircut-item navbar-aircut-link" %>
-      <% end %>
+     <% if user_signed_in? %>
+       <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "navbar-aircut-item navbar-aircut-link" %>
+     <% elsif shop_signed_in? %>
+       <%= link_to "Log out", destroy_shop_session_path, method: :delete, class: "navbar-aircut-item navbar-aircut-link" %>
+     <% end %>
     <!-- Profile picture with dropdown list -->
+
   </div>
   <!-- Dropdown appearing on mobile only -->
   <!-- div class="navbar-aircut-item hidden-md hidden-lg">
