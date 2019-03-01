@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     if resource.class == Shop
       incoming_appointments_path
     else
-      appointments_path
+      root_path
     end
 
   end
