@@ -1,18 +1,16 @@
 <div class="container">
   <div class="cards">
     <% @shops.each do |shop|  %>
-    <div class="card-category">
-      <h4><%= shop.shop_name %></h4>
-
-        <p><strong>Address:</strong><br><%= shop.address %></p>
-        <p><strong>Phone:</strong><%= shop.phone_number %></p>
-        <p><strong>Rating:</strong><%= shop.rating %></p>
-        <p><strong>price:</strong><%= shop.price %></p>
-
-
+    <div class="shop-card">
+      <div>
+      <h4><%= shop.shop_name %>  <%= shop.price %></h4>
+        <p></p>
+        <p><%= shop.phone_number %></p>
+        <p><%= shop.address %></p>
+        <p><strong>Yelp Rating:</strong><%= shop.rating %> stars</p>
+      <%= link_to "Book an appointment", shop_path(shop), class: "btn" %>
+    </div>
       <%= image_tag shop.photo, class: "shop-image"%>
-
-      <%= link_to "See the Store", shop_path(shop), class: "btn btn-light" %>
     </div>
     <% end %>
   </div>
