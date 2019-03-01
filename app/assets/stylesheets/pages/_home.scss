@@ -1,17 +1,40 @@
 // Specific CSS for your home-page
 /* Main navbar */
 
-  .search {
-    width:350px;
-    color: #000;
+  #search_box {
+    margin-right: 15px;
+    padding-bottom: 4px;
+    margin-top: 30px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30%;
+  }
+
+  #search {
+    color: #fff;
+    background: transparent;
+    border-radius: 1px;
+    box-shadow: none;
+    height: 32px;
+    border-width: 1px;
   }
 
   .search {
-    h2 {
+    margin-top: 0px;
+  }
+
+  .search {
+
+
+    h1 {
       color:#fff;
+      margin-top: 0px !important;
       // text-decoration: underline;
     }
-    .btn {
-      border-radius: 10px;
+
+    btn {
+
     }
+
   }

@@ -1,14 +1,32 @@
-<div class="container">
-  <div class="row d-flex">
-    <div class="col-xs-offset-2 col-xs-8 col-md-offset-3 col-md-6">
-      <div class="appointment_form" style="width: 600px; margin-top: 30px; justify-content: center; align-items: center;">
-        <h2> Book an appointment at <%= @shop.shop_name %> </h2>
-        <%= simple_form_for [@shop, @appointment] do |f| %>
-          <%= f.association :barber, collection: Barber.order(name: :asc) %>
-          <%= f.input :scheduled_at, as: :string, required: true, input_html: {class: "datepicker"}  %>
-          <%= f.input :description %>
-          <%= f.submit "Book an Appointment", class: "btn btn-primary book-appointment" %>
-        <% end %>
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-7">
+       <div class ="shop-card">
+        <div>
+          <h4><%= @shop.shop_name %>  <%= @shop.price %></h4>
+            <p></p>
+            <p><%= @shop.phone_number %></p>
+            <p><%= @shop.address %></p>
+            <p><strong>Yelp Rating:</strong><%= @shop.rating %> stars</p>
+        </div>
+        <div>
+          <%= image_tag @shop.photo, class: "shop-image"%>
+        </div>
+       </div>
+      </div>
+      <div class="col-xs-12 col-sm-5">
+        <div class="shop-card">
+          <div>
+            <h4>Book an appointment at <%= @shop.shop_name %> </h4>
+            <%= simple_form_for [@shop, @appointment] do |f| %>
+              <%= f.association :barber, collection: @shop.barbers.order(name: :asc) %>
+              <%= f.input :scheduled_at, as: :string, required: true, input_html: {class: "datepicker"}  %>
+              <%= f.input :description, value: 'what kind of cut do you want?' %>
+              <%= f.submit "Book an Appointment", class: "btn" %>
+            <% end %>
+        </div>
+        </div>
       </div>
     </div>
   </div>
