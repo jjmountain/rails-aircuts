@@ -5,7 +5,7 @@
         <% @shops.each do |shop|  %>
           <div class="shop-card" style="width: 70vw;">
             <div>
-            <h4><%= shop.shop_name %>  <%= shop.price %></h4>
+            <h4><%= shop.shop_name %>  <%= shop.price if shop.price %></h4>
               <p></p>
               <p><%= shop.phone_number %></p>
               <p><%= shop.address %></p>

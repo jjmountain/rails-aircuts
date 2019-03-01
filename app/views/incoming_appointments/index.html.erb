@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-12" id="appointment-for-shop">
+    <div class="col-xs-12" id="appointment-for-shop">
       <h1>Appointments for <%= current_shop.shop_name %></h1>
     </div>
   </div>
@@ -9,10 +9,10 @@
     <div class="col-xs-12 col-md-4">
       <div class="card-appointment">
       <ul class="list-unstyled">
-        <strong> Appointment Status:</strong>
+        <strong> Request sent on <br></strong><%= a.created_at.strftime('%b %e') %> at <%= a.created_at.strftime('%l:%M %p') %>
         <% if a.state == "Approved" || a.state == "Denied" %>
-          <li><%= a.state %></li>
-        <% else  %>
+          <li><strong>Status: </strong><%= a.state %></li>
+        <% else %>
           <li>
             <div class="my-flex-form">
               <% if a.state == 'Pending' %>
@@ -24,18 +24,20 @@
 
               <%= simple_form_for a, url: incoming_appointment_path(a) do |f| %>
                   <%= f.hidden_field :state, value: 'Denied' %>
-                  <%= f.submit "Denied", class: "btn btn-danger btn-sm" %>
+                  <%= f.submit "Deny", class: "btn btn-danger btn-sm" %>
               <% end %>
               <% end %>
             </div>
           </li>
         <% end %>
+        <div style="margin-top: 20px;">
 
-        <li> Scheduled at:  </li>
+        <li><li><strong>Appointment time:</strong> </li> </li>
         <li><%= a.scheduled_at.strftime('%b %e, %l:%M %p')%></li>
-        <li> Customer: <%= a.user.name %></li>
-        <li> Barber: <%= a.barber.name %></li>
-        <li> Description: <%= a.description %></li>
+        <li> <strong>Customer:</strong><li> <%= a.user.name %><li></li>
+        <li> <strong>Barber:</strong> <li><%= a.barber.name %></li></li>
+        <li> <%= a.description if a.description %></li>
+        <div>
 
       </ul>
       </div>

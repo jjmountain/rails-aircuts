@@ -1,28 +1,27 @@
 
 
 <div class="container">
-    <div class="row">
-      <div class="col-12">
+    <div class="row" style="text-align: center;">
+      <div class="col-xs-12">
         <h1>Appointments for <%= current_user.name %></h1>
-
       </div>
     </div>
   <div class="row">
-    <div class="col-sm-12 col-xs-12">
       <% @appointments.each do |a|%>
-        <div class="card-appointment">
-        <ul>
-          <strong> Appointment Status: <%= a.state %></strong>
-          <li> Scheduled at: <%= a.scheduled_at %></li>
-          <li> At: <%= a.barber.shop.shop_name %></li>
-          <li> With: <%= a.barber.name %></li>
-          <!-- <li> Description: <%= a.description %></li> -->
-        </ul>
-        </div>
-      <% end %>
-    </div>
+        <div class="col-sm-12 col-md-4">
+          <div class="card-appointment">
+            <ul class="list-unstyled">
+              <li><em>Your request sent on</em></li><%= a.created_at.strftime('%b %e') %> at <%= a.created_at.strftime('%l:%M %p') %>
+              <li>is
+              <strong><%= a.state %></strong></li><br>
+              <strong>Appointment Info:</strong>
+              <li><%= a.scheduled_at.strftime('%b %e, %l:%M %p')%></li>
 
+              <li> with <%= a.barber.name %></li>
+              <li> <%= a.description if a.description %></li>
+            </ul>
+        </div>
+    </div>
+    <% end %>
   </div>
 </div>
-
-
